@@ -15,7 +15,8 @@ The Titanic competition is a classic binary classification challenge designed fo
 ## 🚀 Project Structure
 
 ```bash
-.
-├── titanic_ensemble_notebook.ipynb  # The main notebook
-├── submission.csv                   # Example submission file (generated after running)
-└── README.md                        # Project documentation
+titanic-ml/
+├── titanic_pipeline_notebook.ipynb
+├── feature_engineering.py
+├── submission.csv
+└── README.md
