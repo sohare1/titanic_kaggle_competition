@@ -1,11 +1,12 @@
-import pandas as pd
+# feature_engineering.py
+
 from sklearn.base import BaseEstimator, TransformerMixin
+import pandas as pd
 
 class FeatureEngineer(BaseEstimator, TransformerMixin):
-    """Extracts Title, FamilySize, IsAlone from Titanic dataset."""
-
-    def __init__(self):
-        self.title_map = {
+    def __init__(self, title_map=None):
+        # scikit-learn needs all params in __init__, even defaults
+        self.title_map = title_map or {
             "Mr": "Mr",
             "Mrs": "Mrs",
             "Miss": "Miss",
@@ -31,11 +32,11 @@ class FeatureEngineer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         X_ = X.copy()
 
-        # Title Extraction & Mapping
+        # Title Feature
         X_['Title'] = X_['Name'].str.extract(' ([A-Za-z]+)\.', expand=False)
         X_['Title'] = X_['Title'].map(self.title_map).fillna('Other')
 
-        # Family Size Features
+        # Family Features
         X_['FamilySize'] = X_['SibSp'] + X_['Parch'] + 1
         X_['IsAlone'] = (X_['FamilySize'] == 1).astype(int)
 
